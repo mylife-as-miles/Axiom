@@ -5,12 +5,12 @@ import InsightPanel from './InsightPanel';
 
 const Dashboard: React.FC = () => {
   return (
-    <main className="flex-1 overflow-y-auto p-8 scroll-smooth">
+    <main className="flex-1 overflow-y-auto p-4 sm:p-8 scroll-smooth">
       <div className="max-w-[1600px] mx-auto flex flex-col gap-8">
         
         {/* KPI Section */}
         <section>
-          <div className="flex items-end justify-between mb-6">
+          <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-6">
             <h2 className="text-2xl font-bold tracking-tight">KPI Overview</h2>
             <div className="flex gap-2">
               <button className="px-3 py-1 text-xs font-bold text-primary bg-primary/10 border border-primary/20 rounded-md">1H</button>

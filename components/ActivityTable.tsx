@@ -55,15 +55,15 @@ const logs: AgentLog[] = [
 const ActivityTable: React.FC = () => {
   return (
     <div className="lg:col-span-2 glass-panel rounded-2xl flex flex-col overflow-hidden h-full min-h-[400px]">
-      <div className="p-6 border-b border-[#254632] flex justify-between items-center bg-[#122118]/50">
+      <div className="p-6 border-b border-[#254632] flex flex-wrap gap-4 justify-between items-center bg-[#122118]/50">
         <h3 className="text-lg font-bold flex items-center gap-2">
           <span className="material-symbols-outlined text-primary">smart_toy</span>
           Autonomous Agent Activity
         </h3>
         <button className="text-xs text-primary font-bold hover:underline">View All Logs</button>
       </div>
-      <div className="flex-1 overflow-auto">
-        <table className="w-full text-left border-collapse">
+      <div className="flex-1 overflow-x-auto">
+        <table className="w-full text-left border-collapse min-w-[600px]">
           <thead className="bg-[#122118] text-xs uppercase text-gray-500 sticky top-0 z-10">
             <tr>
               <th className="px-6 py-4 font-medium tracking-wider">Agent / Action</th>
