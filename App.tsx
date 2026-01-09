@@ -15,14 +15,16 @@ const Placeholder = ({ title }: { title: string }) => (
 );
 
 const Layout: React.FC = () => {
+  const [sidebarOpen, setSidebarOpen] = React.useState(false);
+
   return (
     <div className="flex h-screen w-full bg-background-dark text-white font-display overflow-hidden selection:bg-primary selection:text-black">
-      <Sidebar />
+      <Sidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
       <div className="flex-1 flex flex-col relative overflow-hidden bg-[radial-gradient(circle_at_top_right,_var(--tw-gradient-stops))] from-[#112117] via-[#050505] to-[#050505]">
         {/* Decorative background elements */}
         <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-primary/5 rounded-full blur-[100px] pointer-events-none"></div>
         
-        <Header />
+        <Header onToggleSidebar={() => setSidebarOpen(!sidebarOpen)} />
         <Outlet />
       </div>
     </div>

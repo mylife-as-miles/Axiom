@@ -5,8 +5,8 @@ const AnomalyDetail: React.FC = () => {
   return (
     <div className="flex flex-1 overflow-hidden relative flex-col h-full">
         {/* Page Toolbar / Breadcrumbs */}
-        <div className="flex items-center justify-between whitespace-nowrap border-b border-border-green px-6 py-3 bg-surface-dark/50 backdrop-blur-md z-20 shrink-0">
-            <div className="flex items-center gap-6">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between whitespace-nowrap border-b border-border-green px-4 sm:px-6 py-3 bg-surface-dark/50 backdrop-blur-md z-20 shrink-0 gap-3 sm:gap-0">
+            <div className="flex items-center gap-6 overflow-x-auto">
                 <div className="flex items-center text-sm font-medium text-gray-400 gap-2">
                     <Link to="/anomalies" className="hover:text-white transition-colors">Systems</Link>
                     <span className="material-symbols-outlined text-[16px]">chevron_right</span>
@@ -15,12 +15,12 @@ const AnomalyDetail: React.FC = () => {
                     <span className="text-primary bg-primary/10 px-2 py-0.5 rounded border border-primary/20">Latency Anomaly</span>
                 </div>
             </div>
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-4 justify-between sm:justify-end">
                 <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-red-500/10 border border-red-500/30 text-red-400 text-xs font-bold animate-pulse">
                     <span className="w-2 h-2 rounded-full bg-red-500"></span>
                     LIVE INCIDENT
                 </div>
-                <div className="h-6 w-px bg-border-green"></div>
+                <div className="hidden sm:block h-6 w-px bg-border-green"></div>
                 <div className="flex gap-2">
                     <div className="size-9 rounded-lg bg-primary/20 border border-primary/30 flex items-center justify-center text-primary font-bold">
                         JS
@@ -30,13 +30,13 @@ const AnomalyDetail: React.FC = () => {
         </div>
 
         {/* Main Workspace */}
-        <div className="flex flex-1 overflow-hidden relative">
+        <div className="flex flex-col lg:flex-row flex-1 overflow-hidden relative">
             {/* Background Grid Decoration */}
             <div className="absolute inset-0 z-0 opacity-10 pointer-events-none" style={{ backgroundImage: "linear-gradient(#33e67a 1px, transparent 1px), linear-gradient(90deg, #33e67a 1px, transparent 1px)", backgroundSize: "40px 40px" }}>
             </div>
 
             {/* Left Column: Data Analysis (Scrollable) */}
-            <main className="flex-1 flex flex-col overflow-y-auto z-10 p-6 lg:p-8 gap-6 relative">
+            <main className="flex-1 flex flex-col overflow-y-auto z-10 p-4 sm:p-6 lg:p-8 gap-6 relative">
                 {/* Page Header */}
                 <div className="flex flex-wrap justify-between items-end gap-4 pb-4 border-b border-border-green/50">
                     <div className="flex flex-col gap-2">
