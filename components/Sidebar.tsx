@@ -55,7 +55,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
         </div>
 
         <nav className="flex-1 px-4 space-y-2 overflow-y-auto">
-          <NavLink to="/" className={linkClasses} onClick={onClose} end>
+          <NavLink to="/app" className={linkClasses} onClick={onClose} end>
             {({ isActive }) => (
               <>
                 <span className={iconClasses({ isActive })}>dashboard</span>
@@ -63,7 +63,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
               </>
             )}
           </NavLink>
-          <NavLink to="/anomalies" className={linkClasses} onClick={onClose}>
+          <NavLink to="/app/anomalies" className={linkClasses} onClick={onClose}>
             {({ isActive }) => (
               <>
                 <span className={iconClasses({ isActive })}>warning</span>
@@ -72,7 +72,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
               </>
             )}
           </NavLink>
-          <NavLink to="/agents" className={linkClasses} onClick={onClose}>
+          <NavLink to="/app/agents" className={linkClasses} onClick={onClose}>
             {({ isActive }) => (
               <>
                 <span className={iconClasses({ isActive })}>smart_toy</span>
@@ -80,7 +80,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
               </>
             )}
           </NavLink>
-          <NavLink to="/dataset" className={linkClasses} onClick={onClose}>
+          <NavLink to="/app/dataset" className={linkClasses} onClick={onClose}>
              {({ isActive }) => (
               <>
                 <span className={iconClasses({ isActive })}>dataset</span>
@@ -89,7 +89,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
             )}
           </NavLink>
           <div className="my-4 border-t border-[#254632]"></div>
-          <NavLink to="/settings" className={linkClasses} onClick={onClose}>
+          <NavLink to="/app/settings" className={linkClasses} onClick={onClose}>
              {({ isActive }) => (
               <>
                 <span className={iconClasses({ isActive })}>settings</span>
