@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, useScroll, useTransform, AnimatePresence, useSpring } from 'framer-motion';
 import { ArrowRight, Code, CheckCircle, Cpu, Activity, Zap } from 'lucide-react';
+import Capabilities from '../components/Capabilities';
 
 // --- Utility Components ---
 
@@ -284,6 +285,8 @@ const Landing = () => {
           </div>
         </div>
       </main>
+
+      <Capabilities />
 
       {/* --- Marquee Section --- */}
       <div className="w-full border-t border-primary/20 bg-black/40 backdrop-blur-sm py-8 overflow-hidden relative z-20 mt-auto">
