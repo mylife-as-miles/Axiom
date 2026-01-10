@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { AgentLog } from '../types';
 
 const logs: AgentLog[] = [
@@ -53,6 +54,7 @@ const logs: AgentLog[] = [
 ];
 
 const ActivityTable: React.FC = () => {
+  const navigate = useNavigate();
   return (
     <div className="lg:col-span-2 glass-panel rounded-2xl flex flex-col overflow-hidden h-full min-h-[400px]">
       <div className="p-6 border-b border-[#254632] flex flex-wrap gap-4 justify-between items-center bg-[#122118]/50">
@@ -60,7 +62,12 @@ const ActivityTable: React.FC = () => {
           <span className="material-symbols-outlined text-primary">smart_toy</span>
           Autonomous Agent Activity
         </h3>
-        <button className="text-xs text-primary font-bold hover:underline">View All Logs</button>
+        <button
+          onClick={() => navigate('/agents')}
+          className="text-xs text-primary font-bold hover:underline cursor-pointer"
+        >
+          View All Logs
+        </button>
       </div>
       <div className="flex-1 overflow-x-auto">
         <table className="w-full text-left border-collapse min-w-[600px]">
