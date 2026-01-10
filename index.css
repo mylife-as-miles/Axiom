@@ -11,7 +11,7 @@
   --color-glass: rgba(17, 33, 23, 0.7);
 
   --font-display: "Space Grotesk", sans-serif;
-  --font-body: "Inter", sans-serif;
+  --font-body: "Noto Sans", sans-serif;
 
   --shadow-neon: 0 0 10px rgba(51, 230, 122, 0.2), 0 0 20px rgba(51, 230, 122, 0.1);
   --shadow-glass: 0 4px 30px rgba(0, 0, 0, 0.1);
@@ -46,4 +46,17 @@
     stroke: #254632;
     stroke-width: 1;
     fill: none;
+}
+
+/* 3D Transform Utilities */
+.transform-style-3d {
+  transform-style: preserve-3d;
+}
+
+.translate-z-10 {
+  transform: translateZ(10px);
+}
+
+.-translate-z-10 {
+  transform: translateZ(-10px);
 }
