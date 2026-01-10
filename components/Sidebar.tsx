@@ -80,11 +80,11 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
               </>
             )}
           </NavLink>
-          <NavLink to="/reports" className={linkClasses} onClick={onClose}>
+          <NavLink to="/dataset" className={linkClasses} onClick={onClose}>
              {({ isActive }) => (
               <>
-                <span className={iconClasses({ isActive })}>analytics</span>
-                <span className="font-medium">Reports</span>
+                <span className={iconClasses({ isActive })}>dataset</span>
+                <span className="font-medium">Dataset</span>
               </>
             )}
           </NavLink>

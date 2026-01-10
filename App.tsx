@@ -5,6 +5,7 @@ import Header from './components/Header';
 import Dashboard from './components/Dashboard';
 import Anomalies from './pages/Anomalies';
 import AnomalyDetail from './pages/AnomalyDetail';
+import Dataset from './pages/Dataset';
 
 // Placeholder pages
 const Placeholder = ({ title }: { title: string }) => (
@@ -40,7 +41,7 @@ const App: React.FC = () => {
           <Route path="anomalies" element={<Anomalies />} />
           <Route path="anomalies/:id" element={<AnomalyDetail />} />
           <Route path="agents" element={<Placeholder title="Agents" />} />
-          <Route path="reports" element={<Placeholder title="Reports" />} />
+          <Route path="dataset" element={<Dataset />} />
           <Route path="settings" element={<Placeholder title="Settings" />} />
         </Route>
       </Routes>
