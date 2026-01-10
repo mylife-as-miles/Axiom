@@ -1,6 +1,8 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const InsightPanel: React.FC = () => {
+  const navigate = useNavigate();
   return (
     <div className="lg:col-span-1 flex flex-col gap-6">
       <div className="glass-panel rounded-2xl p-6 relative">
@@ -50,10 +52,13 @@ const InsightPanel: React.FC = () => {
         </div>
         
         <div className="grid grid-cols-2 gap-3 mt-4">
-          <button className="py-2.5 rounded-lg border border-primary/30 text-primary font-bold text-sm hover:bg-primary/10 transition-colors">
+          <button
+            onClick={() => navigate('/anomalies')}
+            className="py-2.5 rounded-lg border border-primary/30 text-primary font-bold text-sm hover:bg-primary/10 transition-colors cursor-pointer"
+          >
             Investigate
           </button>
-          <button className="py-2.5 rounded-lg bg-primary text-black font-bold text-sm hover:bg-primary-dim transition-colors shadow-neon">
+          <button className="py-2.5 rounded-lg bg-primary text-black font-bold text-sm hover:bg-primary-dim transition-colors shadow-neon cursor-pointer">
             Auto-Fix
           </button>
         </div>

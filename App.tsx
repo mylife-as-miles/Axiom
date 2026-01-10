@@ -6,14 +6,8 @@ import Dashboard from './components/Dashboard';
 import Anomalies from './pages/Anomalies';
 import AnomalyDetail from './pages/AnomalyDetail';
 import Dataset from './pages/Dataset';
-
-// Placeholder pages
-const Placeholder = ({ title }: { title: string }) => (
-  <div className="flex-1 p-8 flex items-center justify-center flex-col text-gray-500">
-    <span className="material-symbols-outlined text-6xl mb-4 opacity-20">construction</span>
-    <h2 className="text-2xl font-bold">{title} Under Construction</h2>
-  </div>
-);
+import Agents from './pages/Agents';
+import Settings from './pages/Settings';
 
 const Layout: React.FC = () => {
   const [sidebarOpen, setSidebarOpen] = React.useState(false);
@@ -40,9 +34,9 @@ const App: React.FC = () => {
           <Route index element={<Dashboard />} />
           <Route path="anomalies" element={<Anomalies />} />
           <Route path="anomalies/:id" element={<AnomalyDetail />} />
-          <Route path="agents" element={<Placeholder title="Agents" />} />
+          <Route path="agents" element={<Agents />} />
           <Route path="dataset" element={<Dataset />} />
-          <Route path="settings" element={<Placeholder title="Settings" />} />
+          <Route path="settings" element={<Settings />} />
         </Route>
       </Routes>
     </BrowserRouter>
