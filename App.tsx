@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Routes, Route, Outlet } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Outlet, Navigate } from 'react-router-dom';
 import Sidebar from './components/Sidebar';
 import Header from './components/Header';
 import Dashboard from './components/Dashboard';
@@ -8,8 +8,9 @@ import AnomalyDetail from './pages/AnomalyDetail';
 import Dataset from './pages/Dataset';
 import Agents from './pages/Agents';
 import Settings from './pages/Settings';
+import Landing from './pages/Landing';
 
-const Layout: React.FC = () => {
+const DashboardLayout: React.FC = () => {
   const [sidebarOpen, setSidebarOpen] = React.useState(false);
 
   return (
@@ -30,7 +31,11 @@ const App: React.FC = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Layout />}>
+        {/* Public Route */}
+        <Route path="/" element={<Landing />} />
+
+        {/* Protected/Dashboard Routes */}
+        <Route path="/app" element={<DashboardLayout />}>
           <Route index element={<Dashboard />} />
           <Route path="anomalies" element={<Anomalies />} />
           <Route path="anomalies/:id" element={<AnomalyDetail />} />
@@ -38,6 +43,9 @@ const App: React.FC = () => {
           <Route path="dataset" element={<Dataset />} />
           <Route path="settings" element={<Settings />} />
         </Route>
+
+        {/* Catch all - redirect to Landing */}
+        <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </BrowserRouter>
   );
