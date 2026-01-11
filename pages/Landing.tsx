@@ -3,6 +3,7 @@ import { motion, useScroll, useTransform, AnimatePresence, useSpring } from 'fra
 import { ArrowRight, Code, CheckCircle, Cpu, Activity, Zap } from 'lucide-react';
 import Capabilities from '../components/Capabilities';
 import OperationalLogic from '../components/OperationalLogic';
+import InitiateSequenceSplash from '../components/InitiateSequenceSplash';
 
 // --- Utility Components ---
 
@@ -315,6 +316,7 @@ const Landing = () => {
       </div>
 
       <OperationalLogic />
+      <InitiateSequenceSplash />
 
       {/* Custom Styles for Stroke Text */}
       <style>{`
