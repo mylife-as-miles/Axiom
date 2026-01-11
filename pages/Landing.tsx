@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { motion, useScroll, useTransform, AnimatePresence, useSpring } from 'framer-motion';
 import { ArrowRight, Code, CheckCircle, Cpu, Activity, Zap } from 'lucide-react';
 import Capabilities from '../components/Capabilities';
+import OperationalLogic from '../components/OperationalLogic';
 
 // --- Utility Components ---
 
@@ -312,6 +313,8 @@ const Landing = () => {
           </motion.div>
         </div>
       </div>
+
+      <OperationalLogic />
 
       {/* Custom Styles for Stroke Text */}
       <style>{`
