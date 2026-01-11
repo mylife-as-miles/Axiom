@@ -120,7 +120,7 @@ const Landing = () => {
     // Main Scroll Container with Snapping
     <div
       ref={scrollRef}
-      className="h-screen w-full overflow-y-auto overflow-x-hidden bg-background-dark text-white font-display relative selection:bg-primary selection:text-background-dark snap-y snap-mandatory scroll-smooth"
+      className="h-screen w-full overflow-y-auto overflow-x-hidden bg-background-dark text-white font-display relative selection:bg-primary selection:text-background-dark snap-y snap-mandatory"
     >
 
       {/* --- Background Architecture (Fixed) --- */}
@@ -179,7 +179,7 @@ const Landing = () => {
       </header>
 
       {/* --- Snap Section 1: Hero --- */}
-      <section className="snap-start min-h-screen flex flex-col justify-center items-center relative z-10 pt-32 pb-12 px-6 lg:px-12 w-full max-w-7xl mx-auto">
+      <section className="snap-start [scroll-snap-stop:always] min-h-screen flex flex-col justify-center items-center relative z-10 pt-32 pb-12 px-6 lg:px-12 w-full max-w-7xl mx-auto">
         <div className="w-full grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
           {/* Left: Text Content */}
           <div className="lg:col-span-7 flex flex-col gap-6 text-left relative">
@@ -268,12 +268,12 @@ const Landing = () => {
       </section>
 
       {/* --- Snap Section 2: Capabilities --- */}
-      <section className="snap-start min-h-screen flex items-center justify-center">
+      <section className="snap-start [scroll-snap-stop:always] min-h-screen flex items-center justify-center">
         <Capabilities />
       </section>
 
       {/* --- Snap Section 3: Marquee --- */}
-      <section className="snap-start w-full border-t border-primary/20 bg-black/40 backdrop-blur-sm py-24 overflow-hidden relative z-20">
+      <section className="snap-start [scroll-snap-stop:always] w-full border-t border-primary/20 bg-black/40 backdrop-blur-sm py-24 overflow-hidden relative z-20">
         <div className="absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-background-dark to-transparent z-10"></div>
         <div className="absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-background-dark to-transparent z-10"></div>
         <div className="flex overflow-hidden">
@@ -300,12 +300,14 @@ const Landing = () => {
       <OperationalLogic />
 
       {/* --- Snap Section 7: Splash --- */}
-      <div data-testid="splash-section" className="snap-start h-screen flex items-center justify-center bg-background-dark">
+      <div data-testid="splash-section" className="snap-start [scroll-snap-stop:always] h-screen flex items-center justify-center bg-background-dark">
         <InitiateSequenceSplash />
       </div>
 
       {/* --- Snap Section 8: Footer --- */}
-      <Footer />
+      <div className="snap-start [scroll-snap-stop:always]">
+        <Footer />
+      </div>
 
       {/* Custom Styles for Stroke Text */}
       <style>{`
