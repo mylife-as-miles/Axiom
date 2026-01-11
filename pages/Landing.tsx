@@ -286,10 +286,8 @@ const Landing = () => {
         </div>
       </main>
 
-      <Capabilities />
-
       {/* --- Marquee Section --- */}
-      <div className="w-full border-t border-primary/20 bg-black/40 backdrop-blur-sm py-8 overflow-hidden relative z-20 mt-auto">
+      <div className="w-full border-t border-primary/20 bg-black/40 backdrop-blur-sm py-8 overflow-hidden relative z-20">
         <div className="absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-background-dark to-transparent z-10"></div>
         <div className="absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-background-dark to-transparent z-10"></div>
 
@@ -312,6 +310,8 @@ const Landing = () => {
           </motion.div>
         </div>
       </div>
+
+      <Capabilities />
 
       {/* Custom Styles for Stroke Text */}
       <style>{`
