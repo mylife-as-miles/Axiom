@@ -1,28 +1,28 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { motion, useScroll, useTransform, AnimatePresence, useSpring } from 'framer-motion';
-import { ArrowRight, Code, CheckCircle, Cpu, Activity, Zap } from 'lucide-react';
+import React, { useRef } from 'react';
+import { motion, useScroll, useTransform } from 'framer-motion';
+import { ArrowRight, Code, CheckCircle, Cpu, Zap } from 'lucide-react';
 import Capabilities from '../components/Capabilities';
 import OperationalLogic from '../components/OperationalLogic';
 import InitiateSequenceSplash from '../components/InitiateSequenceSplash';
+import Footer from '../components/Footer';
 
 // --- Utility Components ---
 
 /**
  * ScrambleText
  * Animates text from random characters to the final string.
- * Used for the "Fast Cut" decoding effect.
  */
 const ScrambleText = ({ text, delay = 0, className = "" }: { text: string, delay?: number, className?: string }) => {
-  const [display, setDisplay] = useState("");
-  const [started, setStarted] = useState(false);
+  const [display, setDisplay] = React.useState("");
+  const [started, setStarted] = React.useState(false);
   const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%&";
 
-  useEffect(() => {
+  React.useEffect(() => {
     const timeout = setTimeout(() => setStarted(true), delay * 1000);
     return () => clearTimeout(timeout);
   }, [delay]);
 
-  useEffect(() => {
+  React.useEffect(() => {
     if (!started) return;
 
     let iteration = 0;
@@ -43,7 +43,7 @@ const ScrambleText = ({ text, delay = 0, className = "" }: { text: string, delay
         clearInterval(interval);
       }
 
-      iteration += 1 / 2; // Speed of decoding
+      iteration += 1 / 2;
     }, 30);
 
     return () => clearInterval(interval);
@@ -54,7 +54,6 @@ const ScrambleText = ({ text, delay = 0, className = "" }: { text: string, delay
 
 /**
  * SystemBadge
- * The "System Operational" indicator with pulsing animations.
  */
 const SystemBadge = ({ delay = 0 }: { delay?: number }) => {
   return (
@@ -77,7 +76,6 @@ const SystemBadge = ({ delay = 0 }: { delay?: number }) => {
 
 /**
  * TechButton
- * Buttons with "glitch" or rapid-state-change hover effects.
  */
 const TechButton = ({
   children,
@@ -100,7 +98,6 @@ const TechButton = ({
           : "text-white border border-white/10 hover:bg-white/5 hover:border-primary/50"}
       `}
     >
-      {/* Glitch Overlay Effect on Hover */}
       <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-100 ease-tighter" />
       <span className="relative z-10 flex items-center gap-2 tracking-wide">
         {children}
@@ -112,16 +109,22 @@ const TechButton = ({
 // --- Main Landing Page Component ---
 
 const Landing = () => {
-  const { scrollY } = useScroll();
-  const y1 = useTransform(scrollY, [0, 500], [0, 200]); // Parallax for prism
-  const y2 = useTransform(scrollY, [0, 500], [0, -100]); // Parallax for text
+  // We use a ref for the scroll container to support snapping
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const { scrollY } = useScroll({ container: scrollRef });
+
+  const y1 = useTransform(scrollY, [0, 500], [0, 200]);
+  const y2 = useTransform(scrollY, [0, 500], [0, -100]);
 
   return (
-    <div className="min-h-screen bg-background-dark text-white font-display overflow-x-hidden relative selection:bg-primary selection:text-background-dark">
+    // Main Scroll Container with Snapping
+    <div
+      ref={scrollRef}
+      className="h-screen w-full overflow-y-auto overflow-x-hidden bg-background-dark text-white font-display relative selection:bg-primary selection:text-background-dark snap-y snap-mandatory scroll-smooth"
+    >
 
-      {/* --- Background Architecture --- */}
+      {/* --- Background Architecture (Fixed) --- */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none z-0">
-        {/* Animated Grid Floor */}
         <div
           className="absolute top-[50%] left-[-50%] right-[-50%] h-[200vh] opacity-20 origin-top"
           style={{
@@ -132,33 +135,25 @@ const Landing = () => {
             maskImage: 'linear-gradient(to bottom, black 0%, transparent 60%)'
           }}
         >
-          {/* Moving grid simulation */}
           <motion.div
             className="absolute inset-0"
             animate={{ backgroundPositionY: [0, 60] }}
             transition={{ repeat: Infinity, duration: 2, ease: "linear" }}
-            style={{
-               backgroundImage: 'inherit',
-               backgroundSize: 'inherit'
-            }}
+            style={{ backgroundImage: 'inherit', backgroundSize: 'inherit' }}
           />
         </div>
-
-        {/* Deep Fade Overlay */}
         <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-background-dark/50 to-background-dark z-0" />
-        {/* Vignette */}
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,#050a07_100%)] z-10" />
       </div>
 
-      {/* --- Navigation --- */}
-      <header className="fixed top-6 left-0 right-0 z-50 flex justify-center px-4">
+      {/* --- Navigation (Fixed) --- */}
+      <header className="fixed top-6 left-0 right-0 z-50 flex justify-center px-4 pointer-events-none">
         <motion.div
           initial={{ y: -100, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.5, delay: 0.8 }}
-          className="w-full max-w-5xl glass-panel rounded-full px-6 py-3 flex items-center justify-between shadow-[0_4px_30px_rgba(0,0,0,0.5)] bg-[#112117]/60 backdrop-blur-md border border-[#33e67a]/20"
+          className="pointer-events-auto w-full max-w-5xl glass-panel rounded-full px-6 py-3 flex items-center justify-between shadow-[0_4px_30px_rgba(0,0,0,0.5)] bg-[#112117]/60 backdrop-blur-md border border-[#33e67a]/20"
         >
-          {/* Logo */}
           <div className="flex items-center gap-2 group cursor-pointer">
             <span className="material-symbols-outlined text-primary text-3xl group-hover:drop-shadow-[0_0_8px_rgba(37,244,106,0.8)] transition-all">
               <Zap className="w-6 h-6 text-primary fill-current" />
@@ -166,7 +161,6 @@ const Landing = () => {
             <span className="font-bold text-xl tracking-wider text-white">AXIOM</span>
           </div>
 
-          {/* Navigation Links */}
           <nav className="hidden md:flex items-center gap-8">
             {['Features', 'Pricing', 'API', 'About'].map((item, i) => (
               <a key={item} className="text-sm font-medium text-white/70 hover:text-primary hover:drop-shadow-[0_0_5px_rgba(37,244,106,0.5)] transition-all" href="#">
@@ -175,7 +169,6 @@ const Landing = () => {
             ))}
           </nav>
 
-          {/* Actions */}
           <div className="flex items-center gap-3">
             <button className="hidden sm:block text-sm font-bold text-white hover:text-primary px-3 py-2 transition-colors">Login</button>
             <button className="bg-primary text-background-dark text-sm font-bold px-5 py-2.5 rounded-full hover:bg-[#1ee05e] transition-all shadow-[0_0_15px_rgba(37,244,106,0.3)] hover:shadow-[0_0_25px_rgba(37,244,106,0.6)]">
@@ -185,15 +178,12 @@ const Landing = () => {
         </motion.div>
       </header>
 
-      {/* --- Main Hero Content --- */}
-      <main className="flex-grow flex flex-col justify-center items-center relative z-10 pt-32 pb-12 px-6 lg:px-12 w-full max-w-7xl mx-auto min-h-[90vh]">
+      {/* --- Snap Section 1: Hero --- */}
+      <section className="snap-start min-h-screen flex flex-col justify-center items-center relative z-10 pt-32 pb-12 px-6 lg:px-12 w-full max-w-7xl mx-auto">
         <div className="w-full grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-
           {/* Left: Text Content */}
           <div className="lg:col-span-7 flex flex-col gap-6 text-left relative">
             <SystemBadge delay={0.2} />
-
-            {/* Massive Headline */}
             <motion.div style={{ y: y2 }}>
               <h1 className="text-5xl md:text-7xl xl:text-8xl font-black leading-[0.95] tracking-tight text-white mix-blend-screen mb-4">
                 <span className="block">AUTONOMOUS</span>
@@ -201,9 +191,7 @@ const Landing = () => {
                    <ScrambleText text="INTELLIGENCE." delay={0.5} />
                 </span>
               </h1>
-
               <div className="h-px w-24 bg-gradient-to-r from-primary to-transparent my-6"></div>
-
               <motion.p
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
@@ -213,8 +201,6 @@ const Landing = () => {
                 Anomaly detection at the speed of thought. <br/>
                 <span className="text-white/40">Processed in real-time. Actioned instantly.</span>
               </motion.p>
-
-              {/* CTAs */}
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -235,10 +221,7 @@ const Landing = () => {
 
           {/* Right: 3D Asset Prism */}
           <div className="lg:col-span-5 relative flex justify-center lg:justify-end items-center min-h-[400px]">
-             {/* Ambient Glow */}
              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[350px] h-[350px] bg-primary/20 blur-[90px] rounded-full z-0"></div>
-
-             {/* Prism Object Container */}
              <motion.div
                style={{ y: y1 }}
                initial={{ scale: 0, opacity: 0, rotateY: 90 }}
@@ -252,8 +235,6 @@ const Landing = () => {
                     alt="Abstract 3D crystalline prism"
                     className="w-full h-full object-contain drop-shadow-[0_0_35px_rgba(37,244,106,0.5)] opacity-90 contrast-125 brightness-110 mix-blend-lighten"
                   />
-
-                  {/* Floating Card 1 */}
                   <motion.div
                     initial={{ x: 50, opacity: 0 }}
                     animate={{ x: 0, opacity: 1 }}
@@ -266,8 +247,6 @@ const Landing = () => {
                       Zero
                     </div>
                   </motion.div>
-
-                  {/* Floating Card 2 */}
                   <motion.div
                      initial={{ x: -50, opacity: 0 }}
                      animate={{ x: 0, opacity: 1 }}
@@ -286,15 +265,17 @@ const Landing = () => {
              </motion.div>
           </div>
         </div>
-      </main>
+      </section>
 
-      <Capabilities />
+      {/* --- Snap Section 2: Capabilities --- */}
+      <section className="snap-start min-h-screen flex items-center justify-center">
+        <Capabilities />
+      </section>
 
-      {/* --- Marquee Section --- */}
-      <div className="w-full border-t border-primary/20 bg-black/40 backdrop-blur-sm py-8 overflow-hidden relative z-20 mt-auto">
+      {/* --- Snap Section 3: Marquee --- */}
+      <section className="snap-start w-full border-t border-primary/20 bg-black/40 backdrop-blur-sm py-24 overflow-hidden relative z-20">
         <div className="absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-background-dark to-transparent z-10"></div>
         <div className="absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-background-dark to-transparent z-10"></div>
-
         <div className="flex overflow-hidden">
           <motion.div
             className="flex items-center gap-16 min-w-full"
@@ -313,10 +294,18 @@ const Landing = () => {
             ))}
           </motion.div>
         </div>
+      </section>
+
+      {/* --- Snap Sections 4, 5, 6: Operational Logic --- */}
+      <OperationalLogic />
+
+      {/* --- Snap Section 7: Splash --- */}
+      <div data-testid="splash-section" className="snap-start h-screen flex items-center justify-center bg-background-dark">
+        <InitiateSequenceSplash />
       </div>
 
-      <OperationalLogic />
-      <InitiateSequenceSplash />
+      {/* --- Snap Section 8: Footer --- */}
+      <Footer />
 
       {/* Custom Styles for Stroke Text */}
       <style>{`
