@@ -12,6 +12,7 @@
 
   --font-display: "Space Grotesk", sans-serif;
   --font-body: "Noto Sans", sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
 
   --shadow-neon: 0 0 10px rgba(37, 244, 106, 0.2), 0 0 20px rgba(37, 244, 106, 0.1);
   --shadow-glass: 0 4px 30px rgba(0, 0, 0, 0.5);
