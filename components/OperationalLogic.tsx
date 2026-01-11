@@ -170,7 +170,7 @@ const LogicStep = ({
   visual: any
 }) => {
   return (
-    <section className="h-screen w-full snap-start relative flex items-center justify-center overflow-hidden border-b border-white/5">
+    <section className="h-screen w-full snap-start [scroll-snap-stop:always] relative flex items-center justify-center overflow-hidden border-b border-white/5">
       <div className="max-w-7xl w-full mx-auto px-6 h-full flex flex-col lg:flex-row">
 
         {/* Left: Content */}
