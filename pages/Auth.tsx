@@ -147,6 +147,12 @@ const Auth: React.FC = () => {
     else if (mode === 'FORGOT_PASSWORD') handleForgotPassword(e);
   };
 
+  const handleRegister = async () => {
+    // Clear any existing user data to start fresh onboarding
+    await db.user.clear();
+    navigate('/onboarding/profile');
+  };
+
   return (
     <div className="min-h-screen flex flex-col overflow-hidden bg-background-light dark:bg-background-dark text-slate-900 dark:text-white font-display">
       <div className="flex flex-1 h-screen w-full relative">
@@ -379,7 +385,7 @@ const Auth: React.FC = () => {
                   {/* Right Button (Sign Up) */}
                   <button
                     type="button"
-                    onClick={() => navigate('/onboarding/profile')}
+                    onClick={handleRegister}
                     className="flex-1 bg-transparent border border-primary/30 border-l-0 text-primary hover:bg-primary/10 font-medium text-base tracking-wide flex items-center justify-center gap-2 rounded-r -ml-[1px] z-0 transition-colors cursor-pointer"
                   >
                     REGISTER

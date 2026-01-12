@@ -1,13 +1,21 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { db } from '../../db';
 
 const ProfileSetup: React.FC = () => {
   const navigate = useNavigate();
   const [name, setName] = useState('');
   const [role, setRole] = useState('Analyst');
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    // Save to Dexie
+    await db.user.add({
+      name: name,
+      role: role,
+      step: 'final_activation',
+      joinedAt: new Date()
+    });
     navigate('/onboarding/finalize');
   };
 
