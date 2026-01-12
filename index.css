@@ -61,3 +61,14 @@
 .-translate-z-10 {
   transform: translateZ(-10px);
 }
+
+/* Auth Page Utilities */
+.terminal-bg {
+    background-color: #000000;
+    background-image: linear-gradient(rgba(37, 244, 106, 0.03) 1px, transparent 1px);
+    background-size: 100% 4px;
+}
+
+.clip-path-interlock-left {
+    clip-path: polygon(0 0, 100% 0, 95% 100%, 0% 100%);
+}
