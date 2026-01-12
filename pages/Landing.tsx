@@ -1,4 +1,5 @@
 import React, { useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { ArrowRight, Code, CheckCircle, Cpu, Zap } from 'lucide-react';
 import Capabilities from '../components/Capabilities';
@@ -110,6 +111,7 @@ const TechButton = ({
 // --- Main Landing Page Component ---
 
 const Landing = () => {
+  const navigate = useNavigate();
   // We use a ref for the scroll container to support snapping
   const scrollRef = useRef<HTMLDivElement>(null);
   const { scrollY } = useScroll({ container: scrollRef });
@@ -171,8 +173,8 @@ const Landing = () => {
           </nav>
 
           <div className="flex items-center gap-3">
-            <button className="hidden sm:block text-sm font-bold text-white hover:text-primary px-3 py-2 transition-colors">Login</button>
-            <button className="bg-primary text-background-dark text-sm font-bold px-5 py-2.5 rounded-full hover:bg-[#1ee05e] transition-all shadow-[0_0_15px_rgba(37,244,106,0.3)] hover:shadow-[0_0_25px_rgba(37,244,106,0.6)]">
+            <button onClick={() => navigate('/login')} className="hidden sm:block text-sm font-bold text-white hover:text-primary px-3 py-2 transition-colors cursor-pointer">Login</button>
+            <button onClick={() => navigate('/login')} className="bg-primary text-background-dark text-sm font-bold px-5 py-2.5 rounded-full hover:bg-[#1ee05e] transition-all shadow-[0_0_15px_rgba(37,244,106,0.3)] hover:shadow-[0_0_25px_rgba(37,244,106,0.6)] cursor-pointer">
                Start Trial
             </button>
           </div>
@@ -208,7 +210,7 @@ const Landing = () => {
                 transition={{ delay: 1.2, duration: 0.5 }}
                 className="flex flex-wrap gap-4 mt-8"
               >
-                <TechButton primary>
+                <TechButton primary onClick={() => navigate('/login')}>
                   INITIALIZE SYSTEM
                   <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                 </TechButton>
