@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { db } from '../db';
 
 const Auth: React.FC = () => {
   const navigate = useNavigate();
@@ -12,6 +13,12 @@ const Auth: React.FC = () => {
     console.log('Login attempt:', { email, password });
     // Simulate successful login
     navigate('/app');
+  };
+
+  const handleRegister = async () => {
+    // Clear any existing user data to start fresh onboarding
+    await db.user.clear();
+    navigate('/onboarding/profile');
   };
 
   return (
@@ -142,7 +149,7 @@ const Auth: React.FC = () => {
                   {/* Right Button (Sign Up) */}
                   <button
                     type="button"
-                    onClick={() => navigate('/onboarding/profile')}
+                    onClick={handleRegister}
                     className="flex-1 bg-transparent border border-primary/30 border-l-0 text-primary hover:bg-primary/10 font-medium text-base tracking-wide flex items-center justify-center gap-2 rounded-r -ml-[1px] z-0 transition-colors cursor-pointer"
                   >
                     REGISTER

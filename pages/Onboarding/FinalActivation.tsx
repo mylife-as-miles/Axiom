@@ -1,15 +1,45 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { db } from '../../db';
 
 const FinalActivation: React.FC = () => {
   const navigate = useNavigate();
+  const [userName, setUserName] = useState('');
+  const [userRole, setUserRole] = useState('');
+
+  useEffect(() => {
+    const loadUser = async () => {
+      const user = await db.user.orderBy('id').last();
+      if (!user || user.step === 'profile') {
+        // In a real app we might redirect back, but for now let's allow viewing if they manually navigated or if dev/testing
+        // or just fallback to empty strings if data isn't there, but optimally:
+         if (!user) navigate('/onboarding/profile');
+         else {
+             setUserName(user.name);
+             setUserRole(user.role);
+         }
+      } else {
+        setUserName(user.name);
+        setUserRole(user.role);
+      }
+    };
+    loadUser();
+  }, [navigate]);
+
+  const handleComplete = async () => {
+    const user = await db.user.orderBy('id').last();
+    if (user && user.id) {
+      await db.user.update(user.id, { step: 'complete' });
+    }
+    navigate('/app');
+  };
 
   return (
     <div className="bg-background-light dark:bg-background-dark text-white font-display min-h-screen flex flex-col overflow-x-hidden selection:bg-primary selection:text-background-dark">
       {/* Background Effects */}
-      <div className="fixed inset-0 pointer-events-none z-0 bg-[linear-gradient(rgba(37,244,106,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(37,244,106,0.05)_1px,transparent_1px)] bg-[size:40px_40px]"></div>
+      <div className="fixed inset-0 bg-[linear-gradient(rgba(37,244,106,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(37,244,106,0.05)_1px,transparent_1px)] bg-[size:40px_40px] pointer-events-none z-0"></div>
       <div className="fixed inset-0 bg-gradient-to-t from-background-dark via-transparent to-background-dark pointer-events-none z-0"></div>
-      <div className="fixed inset-0 pointer-events-none z-50 opacity-10 bg-[linear-gradient(to_bottom,rgba(255,255,255,0),rgba(255,255,255,0)_50%,rgba(0,0,0,0.2)_50%,rgba(0,0,0,0.2))] bg-[size:100%_4px]"></div>
+      <div className="fixed inset-0 opacity-10 pointer-events-none z-50 bg-[linear-gradient(to_bottom,rgba(255,255,255,0),rgba(255,255,255,0)_50%,rgba(0,0,0,0.2)_50%,rgba(0,0,0,0.2))] bg-[size:100%_4px]"></div>
 
       {/* Main Container */}
       <div className="relative z-10 flex flex-col h-screen max-h-screen w-full mx-auto max-w-[1200px] p-4 md:p-8">
@@ -44,7 +74,7 @@ const FinalActivation: React.FC = () => {
               </div>
               <img
                 className="w-full h-full object-cover opacity-80 mix-blend-screen hover:scale-110 transition-transform duration-700 ease-in-out"
-                alt="Abstract digital eye iris visualization"
+                alt="Abstract digital eye iris visualization with glowing green data particles"
                 src="/assets/onboarding-eye.png"
               />
             </div>
@@ -62,7 +92,12 @@ const FinalActivation: React.FC = () => {
             <h1 className="text-4xl md:text-6xl font-bold text-white tracking-tight leading-none uppercase" style={{ textShadow: '0 0 10px rgba(37, 244, 106, 0.7)' }}>
               Axiom-AI Is Now <span className="text-primary">Online</span>
             </h1>
-            <p className="text-primary/60 text-sm tracking-[0.3em] uppercase">Initialization Sequence Complete</p>
+            <p className="text-primary/60 text-sm tracking-[0.3em] uppercase">
+              Initialization Sequence Complete
+              {/* Added user identity display as per previous requirement/plan integration */}
+              <br />
+              <span className="text-white block mt-2 text-xs">Identity: {userName} // {userRole}</span>
+            </p>
           </div>
 
           {/* Terminal / Status Log */}
@@ -100,7 +135,7 @@ const FinalActivation: React.FC = () => {
         {/* Footer / Action */}
         <footer className="pb-8 pt-4 flex justify-center w-full">
           <button
-            onClick={() => navigate('/app')}
+            onClick={handleComplete}
             className="group relative flex w-full max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg bg-primary h-16 px-8 text-background-dark shadow-[0_0_10px_theme('colors.primary'),0_0_20px_theme('colors.primary')] hover:shadow-[0_0_10px_theme('colors.primary'),0_0_40px_theme('colors.primary')] transition-all duration-300"
           >
             {/* Button Inner Glow/Shine effect */}
