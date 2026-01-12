@@ -147,12 +147,6 @@ const Auth: React.FC = () => {
     else if (mode === 'FORGOT_PASSWORD') handleForgotPassword(e);
   };
 
-  const handleRegister = async () => {
-    // Clear any existing user data to start fresh onboarding
-    await db.user.clear();
-    navigate('/onboarding/profile');
-  };
-
   return (
     <div className="min-h-screen flex flex-col overflow-hidden bg-background-light dark:bg-background-dark text-slate-900 dark:text-white font-display">
       <div className="flex flex-1 h-screen w-full relative">
@@ -345,13 +339,22 @@ const Auth: React.FC = () => {
                 {/* Links */}
                 <div className="flex justify-between items-center text-xs">
                     {mode === 'LOGIN' && (
-                        <button
-                            type="button"
-                            onClick={() => switchMode('FORGOT_PASSWORD')}
-                            className="text-slate-400 hover:text-primary transition-colors ml-auto"
-                        >
-                            Recover Credentials?
-                        </button>
+                        <>
+                            <button
+                                type="button"
+                                onClick={() => switchMode('REGISTER')}
+                                className="text-slate-400 hover:text-primary transition-colors"
+                            >
+                                Register New Identity
+                            </button>
+                            <button
+                                type="button"
+                                onClick={() => switchMode('FORGOT_PASSWORD')}
+                                className="text-slate-400 hover:text-primary transition-colors"
+                            >
+                                Recover Credentials?
+                            </button>
+                        </>
                     )}
                     {mode !== 'LOGIN' && (
                         <button
@@ -366,11 +369,11 @@ const Auth: React.FC = () => {
 
                 {/* Interlock Buttons */}
                 <div className="flex w-full mt-4 h-14 relative group/buttons">
-                  {/* Left Button (Primary Action) */}
+                  {/* Primary Action Button */}
                   <button
                     type="submit"
                     disabled={isLoading}
-                    className={`flex-1 bg-primary hover:bg-primary-dim text-background-dark font-bold text-base tracking-wide flex items-center justify-center gap-2 rounded-l z-10 clip-path-interlock-left transition-transform active:scale-[0.98] cursor-pointer ${isLoading ? 'opacity-70 cursor-not-allowed' : ''}`}
+                    className={`flex-1 bg-primary hover:bg-primary-dim text-background-dark font-bold text-base tracking-wide flex items-center justify-center gap-2 rounded z-10 transition-transform active:scale-[0.98] cursor-pointer ${isLoading ? 'opacity-70 cursor-not-allowed' : ''}`}
                   >
                     {isLoading ? (
                         <span className="animate-spin material-symbols-outlined text-[20px]">progress_activity</span>
@@ -379,17 +382,7 @@ const Auth: React.FC = () => {
                             {mode === 'LOGIN' ? 'login' : mode === 'REGISTER' ? 'person_add' : 'lock_reset'}
                         </span>
                     )}
-                    {mode === 'LOGIN' ? 'INITIALIZE' : mode === 'REGISTER' ? 'REGISTER' : 'RESET'}
-                  </button>
-
-                  {/* Right Button (Sign Up) */}
-                  <button
-                    type="button"
-                    onClick={handleRegister}
-                    className="flex-1 bg-transparent border border-primary/30 border-l-0 text-primary hover:bg-primary/10 font-medium text-base tracking-wide flex items-center justify-center gap-2 rounded-r -ml-[1px] z-0 transition-colors cursor-pointer"
-                  >
-                    REGISTER
-                    <span className="material-symbols-outlined text-[20px]">person_add</span>
+                    {mode === 'LOGIN' ? 'LOGIN' : mode === 'REGISTER' ? 'REGISTER' : 'RESET'}
                   </button>
                 </div>
               </form>
