@@ -4,6 +4,7 @@ import { ArrowRight, Code, CheckCircle, Cpu, Zap } from 'lucide-react';
 import Capabilities from '../components/Capabilities';
 import OperationalLogic from '../components/OperationalLogic';
 import InitiateSequenceSplash from '../components/InitiateSequenceSplash';
+import Pricing from '../components/Pricing';
 import Footer from '../components/Footer';
 
 // --- Utility Components ---
@@ -304,7 +305,12 @@ const Landing = () => {
         <InitiateSequenceSplash />
       </div>
 
-      {/* --- Snap Section 8: Footer --- */}
+      {/* --- Snap Section 8: Pricing --- */}
+      <section className="snap-start [scroll-snap-stop:always] min-h-screen">
+        <Pricing />
+      </section>
+
+      {/* --- Snap Section 9: Footer --- */}
       <div className="snap-start [scroll-snap-stop:always]">
         <Footer />
       </div>
