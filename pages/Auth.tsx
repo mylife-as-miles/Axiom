@@ -376,24 +376,15 @@ const Auth: React.FC = () => {
                     {mode === 'LOGIN' ? 'INITIALIZE' : mode === 'REGISTER' ? 'REGISTER' : 'RESET'}
                   </button>
 
-                  {/* Right Button (Switch Mode - only on Login) */}
-                  {mode === 'LOGIN' && (
-                    <button
-                      type="button"
-                      onClick={() => switchMode('REGISTER')}
-                      className="flex-1 bg-transparent border border-primary/30 border-l-0 text-primary hover:bg-primary/10 font-medium text-base tracking-wide flex items-center justify-center gap-2 rounded-r -ml-[1px] z-0 transition-colors cursor-pointer"
-                    >
-                      REGISTER
-                      <span className="material-symbols-outlined text-[20px]">person_add</span>
-                    </button>
-                  )}
-                  {mode !== 'LOGIN' && (
-                       <div className="flex-1 bg-transparent border border-primary/30 border-l-0 text-primary/30 font-medium text-base tracking-wide flex items-center justify-center gap-2 rounded-r -ml-[1px] z-0">
-                           {/* Empty placeholder to keep shape or show status */}
-                           SECURE
-                           <span className="material-symbols-outlined text-[20px]">verified_user</span>
-                       </div>
-                  )}
+                  {/* Right Button (Sign Up) */}
+                  <button
+                    type="button"
+                    onClick={() => navigate('/onboarding/profile')}
+                    className="flex-1 bg-transparent border border-primary/30 border-l-0 text-primary hover:bg-primary/10 font-medium text-base tracking-wide flex items-center justify-center gap-2 rounded-r -ml-[1px] z-0 transition-colors cursor-pointer"
+                  >
+                    REGISTER
+                    <span className="material-symbols-outlined text-[20px]">person_add</span>
+                  </button>
                 </div>
               </form>
             </div>
