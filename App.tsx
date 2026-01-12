@@ -9,6 +9,7 @@ import Dataset from './pages/Dataset';
 import Agents from './pages/Agents';
 import Settings from './pages/Settings';
 import Landing from './pages/Landing';
+import Auth from './pages/Auth';
 
 const Layout: React.FC = () => {
   const [sidebarOpen, setSidebarOpen] = React.useState(false);
@@ -32,6 +33,7 @@ const App: React.FC = () => {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Landing />} />
+        <Route path="/login" element={<Auth />} />
         <Route path="/app" element={<Layout />}>
           <Route index element={<Dashboard />} />
           <Route path="anomalies" element={<Anomalies />} />
