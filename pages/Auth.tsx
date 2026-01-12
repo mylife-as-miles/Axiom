@@ -189,14 +189,15 @@ const Auth: React.FC = () => {
               <div className="space-y-6">
                 <div className="flex items-center gap-2 text-primary/80 text-xs font-bold tracking-[0.2em] uppercase">
                   <span className="material-symbols-outlined text-sm">lock_open</span>
+                  {/* Subtitle changes but keeps structure */}
                   {mode === 'LOGIN' && 'Secure Access v3.1'}
-                  {mode === 'REGISTER' && 'New Operative Registration'}
-                  {mode === 'FORGOT_PASSWORD' && 'Credential Recovery'}
+                  {mode === 'REGISTER' && 'Secure Access v3.1 // REGISTRATION'}
+                  {mode === 'FORGOT_PASSWORD' && 'Secure Access v3.1 // RECOVERY'}
                 </div>
                 <h1 className="text-white tracking-tight text-5xl font-bold leading-none uppercase" style={{ fontFeatureSettings: "'ss04' on" }}>
                   System<br/>
                   <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-emerald-600">
-                    {mode === 'LOGIN' ? 'Access' : mode === 'REGISTER' ? 'Register' : 'Recovery'}
+                    Access
                   </span>
                 </h1>
                 <p className="text-slate-400 text-sm leading-relaxed max-w-sm">
@@ -253,7 +254,11 @@ const Auth: React.FC = () => {
 
                 {/* Name (Register only) */}
                 {mode === 'REGISTER' && (
-                  <div className="group">
+                  <motion.div
+                    initial={{ opacity: 0, height: 0 }}
+                    animate={{ opacity: 1, height: 'auto' }}
+                    className="group"
+                  >
                     <label className="block text-primary/80 text-xs font-bold tracking-wider mb-2 uppercase">
                       Operative Name
                     </label>
@@ -268,7 +273,7 @@ const Auth: React.FC = () => {
                         required
                       />
                     </div>
-                  </div>
+                  </motion.div>
                 )}
 
                 {/* Identity Key */}
@@ -303,7 +308,7 @@ const Auth: React.FC = () => {
                         className="w-full bg-surface-dark text-white border border-primary/20 focus:border-primary focus:ring-1 focus:ring-primary h-14 pl-12 pr-12 text-sm rounded transition-all duration-300 placeholder:text-slate-600 outline-none"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
-                        required={mode !== 'FORGOT_PASSWORD' || (mode === 'FORGOT_PASSWORD' && true) /* Require password for reset flow too since we merged it */}
+                        required={mode !== 'FORGOT_PASSWORD' || (mode === 'FORGOT_PASSWORD' && true)}
                       />
                       <button
                         type="button"
@@ -318,7 +323,11 @@ const Auth: React.FC = () => {
 
                 {/* Confirm Password (Register or Forgot Password) */}
                 {(mode === 'REGISTER' || mode === 'FORGOT_PASSWORD') && (
-                  <div className="group">
+                  <motion.div
+                    initial={{ opacity: 0, height: 0 }}
+                    animate={{ opacity: 1, height: 'auto' }}
+                    className="group"
+                  >
                     <label className="block text-primary/80 text-xs font-bold tracking-wider mb-2 uppercase">
                       Confirm Passphrase
                     </label>
@@ -333,7 +342,7 @@ const Auth: React.FC = () => {
                         required
                       />
                     </div>
-                  </div>
+                  </motion.div>
                 )}
 
                 {/* Links */}
@@ -373,18 +382,27 @@ const Auth: React.FC = () => {
                             {mode === 'LOGIN' ? 'login' : mode === 'REGISTER' ? 'person_add' : 'lock_reset'}
                         </span>
                     )}
-                    {mode === 'LOGIN' ? 'INITIALIZE' : mode === 'REGISTER' ? 'REGISTER' : 'RESET'}
+                    {mode === 'LOGIN' ? 'LOGIN' : mode === 'REGISTER' ? 'REGISTER' : 'RESET'}
                   </button>
 
-                  {/* Right Button (Sign Up) */}
-                  <button
-                    type="button"
-                    onClick={() => navigate('/onboarding/profile')}
-                    className="flex-1 bg-transparent border border-primary/30 border-l-0 text-primary hover:bg-primary/10 font-medium text-base tracking-wide flex items-center justify-center gap-2 rounded-r -ml-[1px] z-0 transition-colors cursor-pointer"
-                  >
-                    REGISTER
-                    <span className="material-symbols-outlined text-[20px]">person_add</span>
-                  </button>
+                  {/* Right Button (Switch Mode - only on Login) */}
+                  {mode === 'LOGIN' && (
+                    <button
+                      type="button"
+                      onClick={() => switchMode('REGISTER')}
+                      className="flex-1 bg-transparent border border-primary/30 border-l-0 text-primary hover:bg-primary/10 font-medium text-base tracking-wide flex items-center justify-center gap-2 rounded-r -ml-[1px] z-0 transition-colors cursor-pointer"
+                    >
+                      REGISTER
+                      <span className="material-symbols-outlined text-[20px]">person_add</span>
+                    </button>
+                  )}
+                  {mode !== 'LOGIN' && (
+                       <div className="flex-1 bg-transparent border border-primary/30 border-l-0 text-primary/30 font-medium text-base tracking-wide flex items-center justify-center gap-2 rounded-r -ml-[1px] z-0">
+                           {/* Empty placeholder to keep shape or show status */}
+                           SECURE
+                           <span className="material-symbols-outlined text-[20px]">verified_user</span>
+                       </div>
+                  )}
                 </div>
               </form>
             </div>

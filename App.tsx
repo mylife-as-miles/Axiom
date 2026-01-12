@@ -10,8 +10,6 @@ import Agents from './pages/Agents';
 import Settings from './pages/Settings';
 import Landing from './pages/Landing';
 import Auth from './pages/Auth';
-import ProfileSetup from './pages/Onboarding/ProfileSetup';
-import FinalActivation from './pages/Onboarding/FinalActivation';
 
 const Layout: React.FC = () => {
   const [sidebarOpen, setSidebarOpen] = React.useState(false);
@@ -36,8 +34,6 @@ const App: React.FC = () => {
       <Routes>
         <Route path="/" element={<Landing />} />
         <Route path="/login" element={<Auth />} />
-        <Route path="/onboarding/profile" element={<ProfileSetup />} />
-        <Route path="/onboarding/finalize" element={<FinalActivation />} />
         <Route path="/app" element={<Layout />}>
           <Route index element={<Dashboard />} />
           <Route path="anomalies" element={<Anomalies />} />
